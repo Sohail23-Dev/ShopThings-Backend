@@ -6,7 +6,6 @@ const PORT = 3004;
 const server = express();
 server.use(express.json({ limit: '5mb' })); // or higher if needed
 server.use(express.urlencoded({ limit: '5mb', extended: true }));
-server.use(express.json());
 mongoose
   .connect(
     "mongodb+srv://sohailshaikh778822:ShopThings@shopthings.yyssty9.mongodb.net/"
