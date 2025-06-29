@@ -1,9 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/authRoutes.js";
+import cors from "cors";
 
 const PORT = 3004;
 const server = express();
+server.use(cors({
+  origin: ["https://shopthings.netlify.app"], // add your frontend domain here
+  credentials: true
+}));
 server.use(express.json({ limit: '5mb' })); // or higher if needed
 server.use(express.urlencoded({ limit: '5mb', extended: true }));
 mongoose
