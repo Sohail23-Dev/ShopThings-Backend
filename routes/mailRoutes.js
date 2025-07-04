@@ -1,8 +1,9 @@
 import express from "express";
+import nodemailer from "nodemailer";
 
 const mail = express.Router();
-mail.get("/send-Order-confirmation/:email", async (req, res) => {
-  const email = req.prams.email;
+mail.post("/send-Order-confirmation/:email", async (req, res) => {
+  const email = req.params.email;
   // Create a test account or replace with real credentials.
   const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
