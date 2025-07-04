@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/authRoutes.js";
 import cors from "cors";
+import mail from "./routes/mailRoutes.js";
 
 const PORT = 3004;
 const server = express();
@@ -23,6 +24,7 @@ mongoose
   });
 
   server.use("/api/auth", router);
+  server.use("/Checkout/mail/", mail);
 
 server.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
