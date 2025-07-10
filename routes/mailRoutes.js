@@ -23,14 +23,18 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
   ).join("");
 
   const html = `
-    <h2>Thank you for your order, ${name}!</h2>
-    <p>Order Details:</p>
-    <ul>${cartHtml}</ul>
-    <p><strong>Total:</strong> $${total}</p>
-    <p><strong>Shipping Address:</strong> ${address}</p>
-    <p><strong>Phone:</strong> ${phone}</p>
-    <p><strong>Payment Method:</strong> ${payment === 'cod' ? 'Cash on Delivery' : 'Credit/Debit Card'}</p>
-    <p>We appreciate your business!</p>
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">Thank you for your order, ${name}!</h2>
+      <p class="mb-4">Order Details:</p>
+      <ul class="list-disc list-inside mb-4">
+        ${cartHtml}
+      </ul>
+      <p class="font-bold mb-4"><strong>Total:</strong> $${total}</p>
+      <p class="mb-4"><strong>Shipping Address:</strong> ${address}</p>
+      <p class="mb-4"><strong>Phone:</strong> ${phone}</p>
+      <p class="mb-4"><strong>Payment Method:</strong> ${payment === 'cod' ? 'Cash on Delivery' : 'Credit/Debit Card'}</p>
+      <p class="mb-4">We appreciate your business!</p>
+    </div>
   `;
 
   try {

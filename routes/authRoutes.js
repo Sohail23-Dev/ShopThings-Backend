@@ -14,12 +14,10 @@ router.post("/Register", async (req, res) => {
             return res.status(400).json({message: "User already exists"});
         }
         const hashedPassword = await bcrypt.hash(password, saltValue);
-        // const verificationCode = (Math.floor(Math.random() * 9000) + 1000).toString();
         const newUser = new User({
             email,
             password: hashedPassword,
             joined: joinedDate,
-            
             isVerified: true
         });
         await newUser.save();
