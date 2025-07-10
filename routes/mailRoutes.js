@@ -8,7 +8,7 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
   // Create a test account or replace with real credentials.
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
+    port: 587, //587
     secure: true,
     service: "gmail", // true for 465, false for other ports
     auth: {
