@@ -17,7 +17,7 @@ mongoose
     "mongodb+srv://sohailshaikh778822:ShopThings@shopthings.yyssty9.mongodb.net/ShopThings?retryWrites=true&w=majority"
   )
   .then(() => {
-    console.log(`Database is Connected Su`);
+    console.log(`Database is Connected`);
   })
   .catch((e) => {
     console.log(`${e}`);

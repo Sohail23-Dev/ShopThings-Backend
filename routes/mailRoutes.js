@@ -56,6 +56,16 @@ mail.post("/send-Verification-Code/:email", async (req, res) => {
     return res.status(400).json({ message: "Missing email or verification code" });
   }
   try {
+    const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587, //587
+    secure: true,
+    service: "gmail", // true for 465, false for other ports
+    auth: {
+      user: "shopthingsecommerce@gmail.com",
+      pass: "ztuyolstuwwphegl",
+    },
+  });
     // ...nodemailer setup...
     await transporter.sendMail({
       from: `"Shopthings" <shopthingsecommerce@gmail.com>`,
