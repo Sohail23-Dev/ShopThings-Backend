@@ -48,36 +48,25 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
     res.status(500).send({ message: "Failed to send email" });
   }
 });
-
-mail.post("/send-Verification-Code/:email", async (req, res) => {
+// Example Express route
+mail.post("/Checkout/mail/send-Verification-Code/:email", async (req, res) => {
   const email = req.params.email;
-  const { verificationCode} = req.body;
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    service: "gmail", // true for 465, false for other ports
-    auth: {
-      user: "shopthingsecommerce@gmail.com",
-      pass: "ztuyolstuwwphegl",
-    },
-  });
-
-
-   try {
-    const info = await transporter.sendMail({
-      from: '"Shopthings" <shopthingsecommerce@gmail.com>',
+  const { verificationCode } = req.body;
+  if (!email || !verificationCode) {
+    return res.status(400).json({ message: "Missing email or verification code" });
+  }
+  try {
+    // ...nodemailer setup...
+    await transporter.sendMail({
+      from: `"Shopthings" <shopthingsecommerce@gmail.com>`,
       to: email,
-      subject: "Verification Code From Shopthings",
-      text: `Verification Code: $${verificationCode}`
+      subject: "Your OTP Code",
+      html: `<h2>Your OTP is: ${verificationCode}</h2>`,
     });
-    console.log("Message sent:", info.messageId);
-    res.send({ message: "Email sent successfully" });
+    res.json({ message: "OTP sent" });
   } catch (err) {
     console.error("Mail error:", err);
-    res.status(500).send({ message: "Failed to send email" });
+    res.status(500).json({ message: "Failed to send OTP", error: err.message });
   }
 });
-  
-
 export default mail;
