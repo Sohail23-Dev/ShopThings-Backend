@@ -49,7 +49,7 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
   }
 });
 // Example Express route
-mail.post("/Checkout/mail/send-Verification-Code/:email", async (req, res) => {
+mail.post("/send-Verification-Code/:email", async (req, res) => {
   const email = req.params.email;
   const { verificationCode } = req.body;
   if (!email || !verificationCode) {
