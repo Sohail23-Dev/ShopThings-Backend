@@ -58,7 +58,7 @@ mail.post("/send-Verification-Code/:email", async (req, res) => {
   try {
     const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587, //587
+    port: 465, //587
     secure: true,
     service: "gmail", // true for 465, false for other ports
     auth: {
