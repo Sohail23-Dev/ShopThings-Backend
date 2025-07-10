@@ -10,14 +10,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     phone : {
         type : Number
     },
     address: {
         type: String,
-    },
-    joined: {
-        type: Date
     },
     membership: {
         type : Boolean,
@@ -28,8 +29,9 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String, // base64 or URL
-    }
-})
+    },
+    verificationCode:String
+}, {timestamps: true});
 
 const User = mongoose.model("ShopThings-Users", userSchema);
 

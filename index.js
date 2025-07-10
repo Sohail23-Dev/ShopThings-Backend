@@ -14,7 +14,7 @@ server.use(express.json({ limit: '5mb' })); // or higher if needed
 server.use(express.urlencoded({ limit: '5mb', extended: true }));
 mongoose
   .connect(
-    "mongodb+srv://sohailshaikh778822:ShopThings@shopthings.yyssty9.mongodb.net/"
+    "mongodb+srv://sohailshaikh778822:ShopThings@shopthings.yyssty9.mongodb.net/ShopThings?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log(`Database is Connected`);

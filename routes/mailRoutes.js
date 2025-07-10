@@ -7,9 +7,9 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
   const { name, address, phone, payment, cart, total } = req.body;
   // Create a test account or replace with real credentials.
   const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     service: "gmail", // true for 465, false for other ports
     auth: {
       user: "shopthingsecommerce@gmail.com",
@@ -48,5 +48,36 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
     res.status(500).send({ message: "Failed to send email" });
   }
 });
+
+mail.post("/send-Verification-Code/:email", async (req, res) => {
+  const email = req.params.email;
+  const { verificationCode} = req.body;
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "gmail", // true for 465, false for other ports
+    auth: {
+      user: "shopthingsecommerce@gmail.com",
+      pass: "ztuyolstuwwphegl",
+    },
+  });
+
+
+   try {
+    const info = await transporter.sendMail({
+      from: '"Shopthings" <shopthingsecommerce@gmail.com>',
+      to: email,
+      subject: "Verification Code From Shopthings",
+      text: `Verification Code: $${verificationCode}`
+    });
+    console.log("Message sent:", info.messageId);
+    res.send({ message: "Email sent successfully" });
+  } catch (err) {
+    console.error("Mail error:", err);
+    res.status(500).send({ message: "Failed to send email" });
+  }
+});
+  
 
 export default mail;
