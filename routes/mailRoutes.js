@@ -23,19 +23,28 @@ mail.post("/send-Order-confirmation/:email", async (req, res) => {
   ).join("");
 
   const html = `
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold mb-4">Thank you for your order, ${name}!</h2>
-      <p class="mb-4">Order Details:</p>
-      <ul class="list-disc list-inside mb-4">
-        ${cartHtml}
-      </ul>
-      <p class="font-bold mb-4"><strong>Total:</strong> $${total}</p>
-      <p class="mb-4"><strong>Shipping Address:</strong> ${address}</p>
-      <p class="mb-4"><strong>Phone:</strong> ${phone}</p>
-      <p class="mb-4"><strong>Payment Method:</strong> ${payment === 'cod' ? 'Cash on Delivery' : 'Credit/Debit Card'}</p>
-      <p class="mb-4">We appreciate your business!</p>
+  <div style="background: #fff; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 24px #0001; max-width: 480px; margin: 2rem auto; font-family: 'Segoe UI', Arial, sans-serif;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #2563eb; margin-bottom: 1rem;">
+      Thank you for your order, ${name}!
+    </h2>
+    <p style="margin-bottom: 1rem; color: #374151;">Order Details:</p>
+    <ul style="margin-bottom: 1rem; padding-left: 1.25rem; color: #374151;">
+      ${cartHtml}
+    </ul>
+    <p style="font-weight: bold; margin-bottom: 1rem;">
+      <strong>Total:</strong> $${total}
+    </p>
+    <p style="margin-bottom: 0.5rem;"><strong>Shipping Address:</strong> ${address}</p>
+    <p style="margin-bottom: 0.5rem;"><strong>Phone:</strong> ${phone}</p>
+    <p style="margin-bottom: 0.5rem;"><strong>Payment Method:</strong> ${payment === 'cod' ? 'Cash on Delivery' : 'Credit/Debit Card'}</p>
+    <p style="margin-top: 1.5rem; color: #16a34a; font-weight: 600;">We appreciate your business!</p>
+    <div style="margin-top:2rem; text-align:center;">
+      <a href="https://shopthings.vercel.app" style="display:inline-block; background: linear-gradient(to right, #2563eb, #9333ea); color:#fff; padding:0.75rem 2rem; border-radius:999px; text-decoration:none; font-weight:600; letter-spacing:0.05em;">
+        Visit ShopThings
+      </a>
     </div>
-  `;
+  </div>
+`;
 
   try {
     const info = await transporter.sendMail({
